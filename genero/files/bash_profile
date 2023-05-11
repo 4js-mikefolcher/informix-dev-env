@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -o vi
+source /opt/fourjs/gst/envgenero
+
+source /opt/ibm/ifxenv.sh
+
+export JAVA_HOME="$(realpath $(type java|awk '{print $NF}'|sed 's/[()]//g') |sed 's/\/bin\/java$//')"
+

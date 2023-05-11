@@ -1,0 +1,34 @@
+version: '3.4'
+volumes:
+  ifxdbdisk:
+    external: true
+  ifxdevdisk:
+    external: true
+services:
+  ifx-db:
+    image: ibmcom/informix-developer-database:latest 
+    environment:
+      LICENSE: 'accept'
+    ports:
+      - '9088:9088'
+      - '9089:9089'
+    expose:
+      - '9088'
+      - '9089'
+    volumes:
+      - ifxdbdisk:/opt/ibm
+  ifx-dev:
+    build:
+       context: ./genero
+       args:
+         FGLLICNUM: 'TAB#AAF01AIM'
+         PUBLICKEY: 'id_ed25519_docker.pub'
+         GST_PCK: 'fjs-gstsrv-4.01.01-build202211071225-l64xl217.run'
+    environment:
+      FGLLICNUM: 'TAB#AAF01AIM'
+    ports:
+      - "8888:80"
+      - "2222:22"
+      - "6336:6336"
+    volumes:
+      - ifxdevdisk:/shared

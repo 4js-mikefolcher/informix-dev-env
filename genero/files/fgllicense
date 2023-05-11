@@ -1,0 +1,18 @@
+[server]
+# FLM service host
+host="host.docker.internal"
+
+# FLM service port
+port=6800
+
+[license]
+# License to use with FLM service
+number="@@FGLLICENSE@@"
+
+# Number of requests between active users check
+# user.check=5
+
+[log]
+# enabled=true
+# categories="error,warning,info" #,debug
+# directory="/tmp"

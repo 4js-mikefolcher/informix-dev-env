@@ -1,0 +1,2 @@
+#dbservername    nettype       hostname                                 servicename      options
+ informix        onsoctcp      informix-ifx-db-1.informix_default       9088
