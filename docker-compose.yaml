@@ -5,7 +5,7 @@ volumes:
   ifxdevdisk:
     external: true
 services:
-  ifx-db:
+  db:
     image: ibmcom/informix-developer-database:latest 
     environment:
       LICENSE: 'accept'
@@ -17,7 +17,7 @@ services:
       - '9089'
     volumes:
       - ifxdbdisk:/opt/ibm
-  ifx-dev:
+  dev:
     build:
        context: ./genero
        args:
