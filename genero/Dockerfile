@@ -92,6 +92,7 @@ USER informix
 RUN /home/informix/odbc/installclientsdk -i silent -DLICENSE_ACCEPTED=TRUE -DUSER_INSTALL_DIR=/opt/ibm
 RUN chmod -R g+rwx /opt/ibm
 COPY files/sqlhosts /opt/ibm/etc/sqlhosts
+RUN cat /opt/ibm/etc/sqlhosts
 
 #*****************************************************************************#
 ## Install Genero Components

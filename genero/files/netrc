@@ -1,1 +1,1 @@
-machine informix-ifx-db-1.informix_default login informix password in4mix
+machine informix-dev-env-db-1.informix-dev-env_default login informix password in4mix

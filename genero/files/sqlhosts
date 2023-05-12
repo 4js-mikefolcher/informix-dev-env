@@ -1,2 +1,2 @@
 #dbservername    nettype       hostname                                           servicename      options
- informix        onsoctcp      informix-dev-env-db.informix-dev-env_default       9088
+ informix        onsoctcp      informix-dev-env-db-1.informix-dev-env_default       9088
