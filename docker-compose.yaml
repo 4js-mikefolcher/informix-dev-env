@@ -16,7 +16,7 @@ services:
       - '9088'
       - '9089'
     volumes:
-      - ifxdbdisk:/opt/ibm
+      - ifxdbdisk:/opt/ibm/data
   dev:
     build:
        context: ./genero
@@ -24,6 +24,7 @@ services:
          FGLLICNUM: 'TAB#AAF01AIM'
          PUBLICKEY: 'id_ed25519_docker.pub'
          GST_PCK: 'fjs-gstsrv-4.01.01-build202211071225-l64xl217.run'
+         GENERO_PASSWORD: 'Pass123'
     environment:
       FGLLICNUM: 'TAB#AAF01AIM'
     ports:

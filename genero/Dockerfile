@@ -18,6 +18,8 @@ ARG GST_PCK="fjs-gstsrv-4.01.01-build202211071225-l64xl217.run"
 ARG PUBLICKEY="mykey.pub"
 ARG FGLLICNUM="TAB#ABCD0123"
 
+ARG GENERO_PASSWORD="Pass123"
+
 ENV DEBIAN_FRONTEND=noninteractive
   # Used to skip prompt questions (a bit like -y with yum).
   # See https://www.cyberciti.biz/faq/explain-debian_frontend-apt-get-variable-for-ubuntu-debian/
@@ -27,6 +29,7 @@ ENV USER=${USER}
 ENV FGLGASCONFIGURATION=${FGLGASCONFIGURATION}
 ENV EXPOSE_HTTP_PORT=80
 ENV EXPOSE_SSH_PORT=22
+ENV EXPOSE_HTTP_DISPATCH_PORT=6336
 
 ENV GSTDIR="${FJS_DIR}/gst"
 ENV GASDIR="${FJS_DIR}/gas"
@@ -38,8 +41,9 @@ USER root
 ## Download Prerequisite Packages
 
 # Grab packages
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends --no-install-suggests \
+RUN apt-get -o "Acquire::https::Verify-Peer=false" update \
+  && apt-get -o "Acquire::https::Verify-Peer=false" install \
+  -y --no-install-recommends --no-install-suggests \
   # Leftover packages from the original Dockerfile in case needed in the future.
   # bzip2 \
   # binutils \
@@ -152,7 +156,7 @@ COPY files/entrypoint.sh /entrypoint.sh
 COPY files/host_key_algorithms.conf /etc/ssh/sshd_config.d/host_key_algorithms.conf
 
 RUN sed -i -e "s/@@FGLLICENSE@@/${FGLLICNUM}/g" "${FGLDIR}/etc/fgllicense"
-RUN echo "genero:Pass123" | chpasswd
+RUN echo "genero:${GENERO_PASSWORD}" | chpasswd
 
 #Set locale to en_US
 RUN locale-gen en_US.UTF-8
@@ -180,6 +184,7 @@ RUN chown www-data:www-data "${GASDIR}/apache-auth" \
 ## Expose Required Image Ports
 EXPOSE ${EXPOSE_HTTP_PORT}
 EXPOSE ${EXPOSE_SSH_PORT}
+EXPOSE ${EXPOSE_HTTP_DISPATCH_PORT}
 
 #*****************************************************************************#
 ## Set the Entrypoint
