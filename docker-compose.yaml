@@ -31,5 +31,6 @@ services:
       - "8888:80"
       - "2222:22"
       - "6336:6336"
+      - "6320:6320"
     volumes:
       - ifxdevdisk:/shared
